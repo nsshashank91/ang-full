@@ -1,0 +1,16 @@
+<form #userform="ngForm" (ngSubmit)="loginUser(userform.value)">
+    <div class="form-group">
+        <div>
+            <input type="email" name="email" class="form-control" placeholder="Enter email" ngModel required #email="ngModel" [class.is-invalid]="email.invalid && email.touched">
+            <small class="text-danger" [class.d-none]="email.valid||email.untouched">Enter email</small>
+        </div>
+        <div>
+            <input type="password" name="password" class="form-control" placeholder="Enter password" ngModel required #password="ngModel" [class.is-invalid]="email.invalid && email.touched">
+            <small class="text-danger" [class.d-none]="password.valid||password.untouched">Enter password</small>
+        </div>
+      </div>
+      <input type="submit" value="Login" class="btn btn-success" [disabled]="userform.invalid">
+  </form>
+  <button (click)="gotoregister()" class="btn btn-primary">Register</button>
+  {{msg}}
+  

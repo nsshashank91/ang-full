@@ -1,0 +1,37 @@
+<button (click)="logout()" class="btn btn-primary">Logout</button>
+<div *ngIf="showView">
+<div *ngFor="let profile of profiles">
+{{profile.name}} {{profile.email}} {{profile.phNum}} {{profile.country}}
+<button class="btn btn-danger" (click)="deleteUser(profile)">Delete</button>
+<button class="btn btn-success" (click)="updateUserForm(profile)">Update</button>
+</div>
+{{msg}}
+</div>
+<div *ngIf="updateView">
+    <form #userform="ngForm">
+        <div class="form-group">
+          <input type="text" name="username" class="form-control" placeholder="Enter Username" [(ngModel)]="updateProfile.name" required #username="ngModel" [class.is-invalid]="username.invalid && username.touched">
+          <small class="text-danger" [class.d-none]="username.valid||username.untouched">Enter username</small>
+          <div>
+          <input type="email" name="email" class="form-control" placeholder="Enter email" [(ngModel)]="updateProfile.email" required #email="ngModel" [class.is-invalid]="email.invalid && email.touched">
+          <small class="text-danger" [class.d-none]="email.valid||email.untouched">Enter email</small>
+          </div>
+          <div>
+          <input type="text" pattern="\d{10}" name="phone" class="form-control" placeholder="Enter phone(10 digits)" [(ngModel)]="updateProfile.phNum" required #phone="ngModel" [class.is-invalid]="phone.invalid && phone.touched">
+          <small class="text-danger" [class.d-none]="phone.valid||phone.untouched">Invalid phone</small>
+          </div>
+          <div>
+          <select name="country" class="custom-select" [(ngModel)]="updateProfile.country" #country="ngModel" [class.is-invalid]="countryhaserror && country.touched" (change)="validatecountry(country.value)" (blur)="validatecountry(country.value)">
+
+            <option value="default">Choose country</option>
+            <option *ngFor="let ctr of countries">{{ ctr }}</option>
+          </select>
+          <small class="text-danger" [class.d-none]="!countryhaserror||country.untouched">Choose a country</small>
+          </div>
+          <button (click)="updateProfileUser()" class="btn btn-success" [disabled]="userform.invalid||countryhaserror">Update</button>
+        </div>
+      </form>
+
+
+
+</div>

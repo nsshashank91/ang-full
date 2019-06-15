@@ -1,0 +1,17 @@
+<form #userform="ngForm" (ngSubmit)="registerUser(userform.value)">
+    <div class="form-group">
+        <div>
+            <input type="email" name="email" class="form-control" placeholder="Enter email" ngModel required #email="ngModel" [class.is-invalid]="email.invalid && email.touched">
+            <small class="text-danger" [class.d-none]="email.valid||email.untouched">Enter email</small>
+        </div>
+        <div>
+            <input type="password" name="password" class="form-control" placeholder="Enter password" ngModel required #password="ngModel" [class.is-invalid]="email.invalid && email.touched">
+            <small class="text-danger" [class.d-none]="password.valid||password.untouched">Enter password</small>
+        </div>
+        <select name="role" class="custom-select" ngModel #role="ngModel">
+                <option value="default">Choose role</option>
+                <option *ngFor="let ro of roles">{{ ro }}</option>
+              </select>
+      </div>
+      <input type="submit" value="Register" class="btn btn-success" [disabled]="userform.invalid">
+  </form>
