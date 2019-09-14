@@ -13,7 +13,10 @@ export class UserService {
 
 
   addUser(user) {
-   return this.http.post(this.url,user);//this.users.push(user); //we use subscribe to open the data sent by the database
+   return this.http.post(this.url,user,{
+    withCredentials:true,
+    headers:new HttpHeaders().append('Content-Type','application/json')
+  });//this.users.push(user); //we use subscribe to open the data sent by the database
   }
   updateUser(user) {
     return this.http.put(this.url+'/'+user._id,user);
